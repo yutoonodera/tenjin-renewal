@@ -34,4 +34,3 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-#       run: cd src && vendor/bin/phpunit
