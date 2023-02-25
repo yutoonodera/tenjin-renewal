@@ -47,7 +47,7 @@ jobs:
           USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
           HOST_NAME: ${{ secrets.FTP_SAKURA_PASSWORD }}
         run: |
-          echo "$IdSakuraRentalKey" > private_key && chmod 600 private_key
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 'cd /home/goldokapi5/stgtenjin/ && git pull origin main'
 
 
