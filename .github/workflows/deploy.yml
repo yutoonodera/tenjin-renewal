@@ -47,6 +47,9 @@ jobs:
           HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          if: github.ref == 'refs/heads/staging'
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd /home/goldokapi5/staging/tenjin-renewal/ && git pull origin staging'
+          if: github.ref == 'refs/heads/main'
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd /home/goldokapi5/staging/tenjin-renewal/ && git pull origin main'
 
 
