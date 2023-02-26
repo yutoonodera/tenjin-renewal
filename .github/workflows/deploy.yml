@@ -43,7 +43,7 @@ jobs:
       - name: Deploy
         env:
           DEPLOY_DIR: ${{
-            ( github.ref == 'refs/heads/staging'    && '~/staging/tenjin-renewal' ) ||
+            ( github.ref == 'refs/heads/staging' && '~/staging/tenjin-renewal' ) ||
             ( github.ref == 'refs/heads/main' && '~/production/tenjin-renewal' ) }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
