@@ -44,13 +44,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Test
-        run: echo "test"
-#       - name: Deploy
-#         env:
-#           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-#           USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
-#           HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
-#         run: |
-#           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-#           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin-renewal && git pull origin main'
+        if: github.ref == 'refs/heads/staging'
+      - name: StagingDeploy
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
+          HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin-renewal && git pull origin main'
+        if: github.ref == 'refs/heads/main'
+      - name: ProductionDeploy
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
+          HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/production/tenjin-renewal && git pull origin main'
+
