@@ -1,2 +1,2 @@
 # tenjin-renewal
-kkkkkkkkk
+aiaiaiaimmmmmmm
