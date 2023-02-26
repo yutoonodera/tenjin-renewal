@@ -43,9 +43,11 @@ jobs:
     needs: [laravel-tests]
     runs-on: ubuntu-latest
     steps:
-      if: github.ref == 'refs/heads/staging'
-      - uses: actions/checkout@v3
+      - name: Check out codes
+        uses: actions/checkout@v3
       - name: StagingDeploy
+        id: StagingDeploy
+        if: github.ref == 'refs/heads/staging'
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
@@ -53,13 +55,14 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin-renewal && git pull origin main'
-      if: github.ref == 'refs/heads/main'
-      - uses: actions/checkout@v3
-      - name: ProductionDeploy
+      - name: MainDeploy
+        id: MainDeploy
+        if: github.ref == 'refs/heads/main'
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
           HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/production/tenjin-renewal && git pull origin main'
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin-renewal && git pull origin main'
+   
