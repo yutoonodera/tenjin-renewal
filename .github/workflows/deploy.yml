@@ -41,6 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy
+        if: github.ref == 'refs/heads/staging'
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
