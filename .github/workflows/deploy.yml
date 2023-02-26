@@ -40,14 +40,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy
+      - name: MainDeploy
+        if: github.ref == 'refs/heads/main' 
         env:
-          DEPLOY_DIR: ${{
-            ( github.ref == 'refs/heads/staging' && '~/staging/tenjin-renewal' ) ||
-            ( github.ref == 'refs/heads/main' && '~/production/tenjin-renewal' ) }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USER_NAME: ${{ secrets.FTP_SAKURA_USERNAME }}
           HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ${DEPLOY_DIR} && git pull origin main'
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin=renewal && git pull origin main'
