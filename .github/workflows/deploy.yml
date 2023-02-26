@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      if: github.ref == 'refs/heads/staging'
+        if: github.ref == 'refs/heads/staging'
       - name: StagingDeploy
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
@@ -53,7 +53,7 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin-renewal && git pull origin main'
-      if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
       - name: ProductionDeploy
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
