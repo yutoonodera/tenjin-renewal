@@ -1,2 +1,2 @@
 # tenjin-renewal
-github actions iiiiii
+github actions iiiiiiuuuuuu
