@@ -17,10 +17,8 @@ class NavigationTest extends TestCase
 
     public function setUp(): void
     {
-        // parent::setUp();
-        // $user = factory(User::class)->create();
-        // $this->actingAs($user);
-        // $page = factory(Page::class)->create();
+        parent::setUp();
+ 
     }
 
         /**
