@@ -3,12 +3,6 @@ name: Laravel
 on:
   push:
     branches:
-  #     - staging
-  #     - main
-  # pull_request:
-  #   branches:
-  #     - staging
-  #     - main
 jobs:
   laravel-tests:
 
@@ -23,8 +17,6 @@ jobs:
       run: cd src && php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
       run: cd src && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-#     - name: migration
-#       run: cd src && php artisan migrate
     - name: Generate key
       run: cd src && php artisan key:generate
     - name: Directory Permissions
@@ -33,11 +25,11 @@ jobs:
       run: |
         cd src && mkdir -p database
         touch database/database.sqlite
-#     - name: Execute tests (Unit and Feature tests) via PHPUnit
-#       env:
-#         DB_CONNECTION: sqlite
-#         DB_DATABASE: database/database.sqlite
-#       run: cd src && vendor/bin/phpunit
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: cd src && vendor/bin/phpunit
 
   deploy:
     needs: [laravel-tests]
