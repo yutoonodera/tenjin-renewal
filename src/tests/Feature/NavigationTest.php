@@ -10,7 +10,7 @@ use App\User;
 use App\Repositories\PageRepository;
 use App\Http\Requests\PageRequest;
 
-class Main extends TestCase
+class NavigationTest extends TestCase
 {
     //use RefreshDatabase;
     use WithoutMiddleware;
@@ -18,33 +18,16 @@ class Main extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
-        $page = factory(Page::class)->create();
+ 
     }
 
         /**
      *
      * @return void
      */
-    public function test_main作成ページが通ること()
+    public function test_getが通ること()
     {
-
-        $response = $this->get('/new');
+        $response = $this->get('/');
         $response->assertStatus(200);
     }
-
-            /**
-     *
-     * @return void
-     */
-    public function test_メインページを作成できること()
-    {
-
-        $mainRepository = new mainRepository();
-        
-
-
-    }
-
 }
