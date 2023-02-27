@@ -3,9 +3,9 @@ name: Laravel
 on:
   push:
     branches:
-      - staging
-      - main
-  pull_request:
+  #     - staging
+  #     - main
+  # pull_request:
   #   branches:
   #     - staging
   #     - main
