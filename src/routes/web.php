@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'DisplayController@index')->name('display.index');
-Route::get('/{url}', 'DisplayController@mainPage')->name('display.mainPage');
-Route::get('/pages/{url}', 'DisplayController@privatePage')->name('display.privatePage');
-
-Route::get('/contact/new', 'ContactController@newForm')->name('contact.new');
-Route::post('/contact/new', 'ContactController@new');
+Route::get('/', 'MoviePageController@index')->name('moviepage.index');
+Route::get('/moviepage/new', 'MoviePageController@newForm')->name('moviepage.new');
+Route::post('/moviepage/new', 'MoviePageController@new');
+Route::get('/moviepage/thanks', 'MoviePageController@thanks')->name('moviepage.thanks');
+Route::get('/{pageurl}', 'MoviePageController@myPage')->name('moviepage.mypage');

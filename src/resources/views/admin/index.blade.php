@@ -35,31 +35,23 @@
         <div class="container">
             <div class="row">
               <div class="col col-md-offset-1 col-md-10">
-                <p>個別ページ一覧</p>
-                {{$googleSheetOpenMessage}}<br>
-                <a href="{{$googleSheetUrl}}" target="_blank" rel="noopener noreferrer">アクセス情報スプレッドシート</a>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
-                        <th  style="width:16em">タイトル</th>
-                        <th  style="width:16em">URL</th>
-                        <th  style="width:10em">ステータス</th>
-                        <th>編集</th>
+                        <th  style="width:16em">動画</th>
+                        <th  style="width:16em">ページURL</th>
                         <th>削除</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($pages as $page)
                     <tr>
-                        <td><a href="{{ route('display.privatePage', ['url' => $page->url]) }}"target="_blank" rel="noopener noreferrer">{{$page->title}}</a></td>
-                        <td><a href="/pages/{{$page->url}}"target="_blank" rel="noopener noreferrer">/pages/{{$page->url}}</a></td>
-                        <td>{{$page->status}}</td>
-                        <td>{!! Form::open(['route' => ['admin.page.edit', 'pageId' => $page->id], 'method' => 'get'])!!}
-                            <button type="submit">編集</button>
-                            {!! Form::close() !!}</td>
+
+                        <td><video width="200" height="200" controls src="{{ Storage::disk('s3')->url('uploads/page/13/image_6411d1e1d056f.MOV') }}"></video></td>
+                        <td>aaaa</td>
                         <td>{!! Form::open(['route' => ['admin.page.delete', 'pageId' => $page->id], 'method' => 'delete'])!!}
-                            <button type="submit">削除</button>
+                            <button typpx"submit">削除</button>
                             {!! Form::close() !!}</td>
                     </tr>
                     @endforeach

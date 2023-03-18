@@ -25,12 +25,7 @@ class PageRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'url' => 'required|max:255',
-            'content01' => 'max:1000',
-            'image01' => 'image',
-            'content02' => 'max:1000',
-            'image02' => 'image',
+            //'movie' => 'image',
 
         ];
     }
@@ -38,7 +33,6 @@ class PageRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title' => 'タイトル',
         ];
     }
 }

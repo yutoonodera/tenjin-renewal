@@ -24,7 +24,6 @@ Route::get('/admin/main/delete/{pageId}/{imagename}', 'AdminMainController@delet
 Route::get('/admin/pages/{url}', 'AdminPageController@page')->name('admin.pages.index');
 Route::get('/admin/page/new', 'AdminPageController@newForm')->name('admin.page.new');
 Route::post('/admin/page/new', 'AdminPageController@new');
-// Route::get('/admin/page/newreq', 'AdminPageController@newReqForm')->name('admin.page.newreq');
 
 Route::get('/admin/page/edit/{pageId}', 'AdminPageController@editForm')->name('admin.page.edit');
 Route::post('/admin/page/edit/{pageId}', 'AdminPageController@edit');
@@ -34,9 +33,6 @@ Route::get('/admin/page/delete/{pageId}/{imagename}', 'AdminPageController@delet
 
 });
 
-// Route::get('/admin/blogs/{url}', 'AdminBlogController@blog')->name('admin.blogs.index');
-// Route::get('/admin/blog/new', 'AdminBlogController@newForm')->name('admin.blog.new');
-// Route::post('/admin/blog/new', 'AdminBlogController@new');
 
 Route::post('/send', 'MailController@send');
 Auth::routes();
