@@ -20,6 +20,8 @@ jobs:
       run: cd src && php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
       run: cd src && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    - name: update Dependencies
+      run: cd src && composer update
     - name: Generate key
       run: cd src && php artisan key:generate
     - name: Directory Permissions
@@ -49,7 +51,7 @@ jobs:
           HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin-renewal && git pull origin staging'
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/staging/tenjin-renewal && git pull origin staging && cd src && php artisan migrate'
       - name: ProductionDeploy
         id: ProductionDeploy
         if: github.ref == 'refs/heads/main'
@@ -59,5 +61,5 @@ jobs:
           HOST_NAME: ${{ secrets.FTP_SAKURA_HOSTNAME }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/production/tenjin-renewal && git pull origin main'
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key ${USER_NAME}@${HOST_NAME} 'cd ~/production/tenjin-renewal && git pull origin main && cd src && php artisan migrate'
    

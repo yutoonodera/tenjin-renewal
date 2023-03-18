@@ -11,6 +11,6 @@ interface ImageServiceInterface
 
     public function storagePut(Page $page, $thumbnail, string $uploadDir, string $fileName, string $column): void;
 
-    public function saveColumn(Page $page, string $column, string $fileName): void;
+    public function saveMovieName(Page $page, string $column, string $fileName): void;
 
 }

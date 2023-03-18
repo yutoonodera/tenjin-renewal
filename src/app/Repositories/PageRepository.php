@@ -24,4 +24,13 @@ class PageRepository implements PageRepositoryInterface
         return $page->save();
 
     }
+
+    function pageUrlCreate(Page $page)
+    {
+        md5(uniqid(rand(), true));
+        $page->pagelink =  uniqid().$page->id;
+        //openssl_encrypt($page->id, 'AES-128-ECB', '長い鍵長い鍵');
+        $page->save();
+        return false;
+    }
 }
